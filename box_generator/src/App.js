@@ -1,24 +1,31 @@
 import logo from './logo.svg';
+import { useState } from 'react';
+import MakeBoxes from './components/MakeBoxes';
+import PlaceBoxes from './components/PlaceBoxes';
+import BoxStyle from './components/BoxStyle';
 import './App.css';
 
 function App() {
+  const [boxes, setBoxes] = useState([]);
+
+  const addBoxToArray = e => {
+    let newBox = {
+      color: e,
+    }
+    setBoxes([...boxes, newBox]);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+        <MakeBoxes
+          submitBox={addBoxToArray}
+        />
+      <div id="wrapper">
+        <PlaceBoxes
+          boxes={boxes}
+        />
+      </div>
+    </>
   );
 }
 
